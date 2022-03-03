@@ -17,22 +17,10 @@ CREATE TABLE if not exists `t_rebuild_next_table_init` (
 ) ENGINE=InnoDB COMMENT='需要创建次日/月的配置表';
 
 #### 按天分
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_game_record', 'game_record_cp', 0, 'sys', now());
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_game_record', 'game_record_dj', 0, 'sys', now());
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_game_record', 'game_record_dy', 0, 'sys', now());
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_game_record', 'game_record_qp', 0, 'sys', now());
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_game_record', 'game_record_ty', 0, 'sys', now());
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_game_record', 'game_record_zr', 0, 'sys', now());
+INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_record', 'record_order', 0, 'sys', now());
 
 #### 按月分
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_game_api', 'ob_game_transfer', 1, 'sys', now());
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_account', 'ob_discount', 1, 'sys', now());
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_account', 'ob_account_detail', 1, 'sys', now());
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_account', 'ob_order', 1, 'sys', now());
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_account', 'ob_user_bill_detatil', 1, 'sys', now());
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_player',  'ob_login_log', 1, 'sys', now());
-
-INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_account',  'activity_visit_data', 1, 'sys', now());
+INSERT INTO `t_rebuild_next_table_init`(`SCHEMA_NAME`, `TABLE_NAME`, `is_type`, `CREATION_BY`, `CREATION_TIME`) VALUES ('ob_api', 'ob_transfer', 1, 'sys', now());
 
 use my_tools;
 DELIMITER $$
