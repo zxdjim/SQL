@@ -1,0 +1,38 @@
+####. 2.加强版，可传参数式调用，可用于区分ddl,dml等特殊情况下死锁的查杀
+use my_tools;
+DELIMITER $$
+drop procedure if exists sp_kill_trx$$
+create procedure sp_kill_trx(in v_qry varchar(1000))
+begin
+  DROP TEMPORARY TABLE if exists my_tools.v_trx;
+  CREATE TEMPORARY TABLE my_tools.v_trx(trx_mysql_thread_id bigint(21) unsigned);
+begin
+### DEMO1: call my_tools.sp_kill_trx("");
+### DEMO2: call my_tools.sp_kill_trx("where trx_query like 'UPDATE s_third_match_history_statistics  SET%'");
+### 杀死死锁的线程ID
+declare done              int default false;
+declare v_kill_sql        varchar(50);
+DECLARE my_cur CURSOR for
+select concat('kill ',trx_mysql_thread_id,';') as mysql_thread_id from my_tools.v_trx;
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = true;
+set @v_sql = concat("insert ignore into my_tools.v_trx select trx_mysql_thread_id from information_schema.innodb_trx ",v_qry);
+PREPARE STMT FROM @v_sql;
+EXECUTE STMT;
+DEALLOCATE PREPARE STMT;
+
+open my_cur;
+read_loop:loop
+fetch my_cur into v_kill_sql;
+IF done then
+  leave read_loop;
+END IF;
+ SET @SQL = '';
+ SET @SQL = v_kill_sql;
+PREPARE STMT FROM @SQL;
+EXECUTE STMT;
+DEALLOCATE PREPARE STMT;
+end loop;
+close my_cur;
+end;
+end $$
+DELIMITER ;
